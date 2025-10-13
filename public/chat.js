@@ -22,6 +22,27 @@ const loadUsers = async function() {
     option.textContent = user.username;
     select.appendChild(option);
   });
+
+  document.getElementById('send_interlocutor').addEventListener('submit', async (e) => {
+    e.preventDefault();
+  
+    interlocutor = e.target.interlocutor.value;
+    console.log("interlocutor", interlocutor);
+    window.location.href = '/conversation.html';
+  });
+
+  let send_interlocutor = document.getElementById("send_interlocutor");
+
+  send_interlocutor.onclick = (e) => {
+
+    const userSelect = document.getElementById("userSelect");
+    interlocutorId = userSelect.value;
+    const interlocutorUsername = userSelect.options[userSelect.selectedIndex].text;
+    console.log(`{userId: ${interlocutorId}, usename : ${interlocutorUsername}}`)
+
+    localStorage.setItem('chatWith', interlocutorUsername);
+    window.location.href = '/conversation.html';
+  };
 }
 
 const saveUser = async function(username, password) {
