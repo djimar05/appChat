@@ -8,14 +8,28 @@
 <body>
   <div id="body">
     <div class="container">
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="chat.js"></script>
 
-  <h2>Select a user to chat with</h2>
+      <h2>Select a user to chat with</h2>
 
-  <div id="userList"></div>
+      <div id="userList">
+        <form>
+          <label for="userSelect">Choose an option:</label>
+           <select id="userSelect" name="userchatOption">
+              <script>
+                // ici faire une requete pour recuperer la liste des user sans le user connecté
+                // afficher  <option value="option1">Option 1</option>
+                loadUsers();
+              </script>
+          </select>
+
+          <button>Soumettre</button>
+        </form>
+       
+      </div>
     </div>
   </div>
-  <script src="/socket.io/socket.io.js"></script>
-
-  <script src="chat.js"></script>
+    
 </body>
 </html>
