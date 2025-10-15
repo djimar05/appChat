@@ -12,7 +12,13 @@ socket.on('connect', () => {
       console.log('Connected to server');
 })
 
- socket.on('join', (user) => {
+senderId = localStorage.getItem("userId");
+
+if(senderId) {
+  socket.emit("join", {userId : senderId} )
+}
+
+socket.on('join', (user) => {
     socket.receiver = user;
     socket.join(user)
     console.log("socket#join#userId", user)
@@ -282,10 +288,16 @@ const loggin = async function(username, password){
     const data = await response.json();
     console.log('Enrgeistrement reussi :', data);
     
-    
+  
     console.log("username", username);
     localStorage.setItem('token', data.token);
     localStorage.setItem('username', username);
+
+    retrieveUser(username).then((user) => {
+      localStorage.setItem('userId', user._id);
+    }).catch((err) => {
+      console.log("Erreur", err);
+    });
 
     loadMessages();
     window.location.href = `/main.html`;

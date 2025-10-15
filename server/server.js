@@ -33,11 +33,12 @@ let users = {};
 io.on("connection", (socket) => {
     console.log(`Nouvelle connexion : ${socket.id}`);
     
-    socket.on('join', (user) => {
-        users[user] = socket.id;
-        console.log(`${user} est connecté (${socket.id})`);
-        socket.userConnected = user;
-        socket.join(user)
+    socket.on('join', ({userId}) => {
+        users[userId] = socket.id
+       //socket.id;
+        console.log(`${userId} est connecté (${socket.id})`);
+        socket.userId = userId;
+        socket.join(userId)
     });
     // Réception d'un message d'un utilisateur
     socket.on('sendMessage', (data) => {
