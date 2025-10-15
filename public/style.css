@@ -123,3 +123,8 @@ button:hover {
 #send {
   padding: 10px 16px;
 }
+
+.sender {
+  background-color: blue;
+  text-align: right;
+}

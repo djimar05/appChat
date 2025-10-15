@@ -77,6 +77,32 @@ const controller = {
             });
         }
            
+    },
+
+    retriveOne : function(req, res){
+       const  username = req.params.username;
+        User.findOne({ username: username }).then((user) => {
+            if(user){
+                res.status(200).send(user);
+            }else{
+                res.status(404).json({ error: 'User not found.' });
+            }
+        }).catch((err) => {
+            res.status(500).json({ error: 'An error occurred while retrieving the User.' });
+        })
+    },
+
+    findById : function(req, res) {
+        const  userId = req.params.userId;
+        User.findOne({ _id: userId }).then((user) => {
+            if(user){
+                res.status(200).send(user);
+            }else{
+                res.status(404).json({ error: 'User not found.' });
+            }
+        }).catch((err) => {
+            res.status(500).json({ error: 'An error occurred while retrieving the User.' });
+        })
     }
 }
 
